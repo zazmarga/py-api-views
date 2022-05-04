@@ -43,7 +43,6 @@ class ActorApiTests(TestCase):
         response = self.client.post(
             "/api/cinema/actors/",
             {
-                "id": 3,
                 "first_name": "Scarlett",
                 "last_name": "Johansson",
             },
@@ -51,7 +50,7 @@ class ActorApiTests(TestCase):
         db_actors = Actor.objects.all()
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(db_actors.count(), 3)
-        self.assertEqual(db_actors.get(id=3).first_name, "Scarlett")
+        self.assertEqual(db_actors.filter(first_name="Scarlett").count(), 1)
 
     def test_get_actor(self):
         response = self.client.get("/api/cinema/actors/2/")

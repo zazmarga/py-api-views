@@ -37,14 +37,13 @@ class GenreApiTests(TestCase):
         response = self.client.post(
             "/api/cinema/genres/",
             {
-                "id": 3,
                 "name": "Sci-fi",
             },
         )
         db_genres = Genre.objects.all()
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(db_genres.count(), 3)
-        self.assertEqual(db_genres.get(id=3).name, "Sci-fi")
+        self.assertEqual(db_genres.filter(name="Sci-fi").count(), 1)
 
     def test_get_genre(self):
         response = self.client.get("/api/cinema/genres/2/")

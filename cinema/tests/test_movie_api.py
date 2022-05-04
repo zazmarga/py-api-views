@@ -38,7 +38,6 @@ class MovieApiTests(TestCase):
         movies = self.client.post(
             "/api/cinema/movies/",
             {
-                "id": 3,
                 "title": "Superman",
                 "description": "Superman description",
                 "duration": 170,
@@ -47,7 +46,7 @@ class MovieApiTests(TestCase):
         db_movies = Movie.objects.all()
         self.assertEqual(movies.status_code, status.HTTP_201_CREATED)
         self.assertEqual(db_movies.count(), 3)
-        self.assertEqual(db_movies.get(id=3).title, "Superman")
+        self.assertEqual(db_movies.filter(title="Superman").count(), 1)
 
     def test_post_invalid_movies(self):
         movies = self.client.post(
