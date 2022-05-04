@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from rest_framework.test import APIClient
-from rest_framework import status, generics, mixins, viewsets
+from rest_framework import status, generics
 
 from cinema.serializers import CinemaHallSerializer
 from cinema.models import CinemaHall
@@ -43,7 +43,7 @@ class CinemaHallApiTests(TestCase):
                 "name": "Yellow",
                 "rows": 14,
                 "seats_in_row": 15,
-            }
+            },
         )
         db_cinema_halls = CinemaHall.objects.all()
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -52,12 +52,14 @@ class CinemaHallApiTests(TestCase):
 
     def test_get_cinema_hall(self):
         response = self.client.get("/api/cinema/cinema_halls/2/")
-        serializer = CinemaHallSerializer(CinemaHall(
-            id=2,
-            name="VIP",
-            rows=6,
-            seats_in_row=8,
-        ))
+        serializer = CinemaHallSerializer(
+            CinemaHall(
+                id=2,
+                name="VIP",
+                rows=6,
+                seats_in_row=8,
+            )
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, serializer.data)
 
@@ -72,7 +74,7 @@ class CinemaHallApiTests(TestCase):
                 "name": "Yellow",
                 "rows": 14,
                 "seats_in_row": 15,
-            }
+            },
         )
         cinema_hall_pk_1 = CinemaHall.objects.get(pk=1)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -86,7 +88,7 @@ class CinemaHallApiTests(TestCase):
                 "Yellow",
                 14,
                 15,
-            ]
+            ],
         )
 
     def test_patch_cinema_hall(self):
@@ -94,7 +96,7 @@ class CinemaHallApiTests(TestCase):
             "/api/cinema/cinema_halls/1/",
             {
                 "name": "Green",
-            }
+            },
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(CinemaHall.objects.get(id=1).name, "Green")

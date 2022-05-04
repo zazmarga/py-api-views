@@ -1,13 +1,12 @@
 from django.test import TestCase
 
 from rest_framework.test import APIClient
-from rest_framework import status, generics, mixins, viewsets
+from rest_framework import status
 
 from cinema.serializers import MovieSerializer
 from cinema.models import Movie
 from cinema.views import MovieViewSet
 from rest_framework.viewsets import ModelViewSet
-
 
 
 class MovieApiTests(TestCase):
@@ -27,9 +26,7 @@ class MovieApiTests(TestCase):
         )
 
     def test_movie_viewset_is_subclass_model_viewset(self):
-        self.assertEqual(
-            issubclass(MovieViewSet, ModelViewSet), True
-        )
+        self.assertEqual(issubclass(MovieViewSet, ModelViewSet), True)
 
     def test_get_movies(self):
         movies = self.client.get("/api/cinema/movies/")
@@ -45,7 +42,7 @@ class MovieApiTests(TestCase):
                 "title": "Superman",
                 "description": "Superman description",
                 "duration": 170,
-            }
+            },
         )
         db_movies = Movie.objects.all()
         self.assertEqual(movies.status_code, status.HTTP_201_CREATED)
@@ -59,7 +56,7 @@ class MovieApiTests(TestCase):
                 "title": "Superman",
                 "description": "Superman description",
                 "duration": "two hundred",
-            }
+            },
         )
         superman_movies = Movie.objects.filter(title="Superman")
         self.assertEqual(movies.status_code, status.HTTP_400_BAD_REQUEST)
@@ -67,12 +64,14 @@ class MovieApiTests(TestCase):
 
     def test_get_movie(self):
         response = self.client.get("/api/cinema/movies/2/")
-        serializer = MovieSerializer(Movie(
-            id=2,
-            title="Batman",
-            description="Batman description",
-            duration=190,
-        ))
+        serializer = MovieSerializer(
+            Movie(
+                id=2,
+                title="Batman",
+                description="Batman description",
+                duration=190,
+            )
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, serializer.data)
 
@@ -87,20 +86,16 @@ class MovieApiTests(TestCase):
                 "title": "Watchman",
                 "description": "Watchman description",
                 "duration": 190,
-            }
+            },
         )
         db_movie = Movie.objects.get(id=1)
         self.assertEqual(
-            [
-                db_movie.title,
-                db_movie.description,
-                db_movie.duration
-            ],
+            [db_movie.title, db_movie.description, db_movie.duration],
             [
                 "Watchman",
                 "Watchman description",
                 190,
-            ]
+            ],
         )
         self.assertEqual(db_movie.title, "Watchman")
 
@@ -111,7 +106,7 @@ class MovieApiTests(TestCase):
                 "title": "Watchmen",
                 "description": "Watchmen description",
                 "duration": "fifty",
-            }
+            },
         )
         db_movie = Movie.objects.get(id=1)
         self.assertEqual(db_movie.duration, 200)
@@ -122,7 +117,7 @@ class MovieApiTests(TestCase):
             "/api/cinema/movies/1/",
             {
                 "title": "Watchmen",
-            }
+            },
         )
         db_movie = Movie.objects.get(id=1)
         self.assertEqual(db_movie.title, "Watchmen")
@@ -133,7 +128,7 @@ class MovieApiTests(TestCase):
             "/api/cinema/movies/1/",
             {
                 "duration": "fifty",
-            }
+            },
         )
         db_movie = Movie.objects.get(id=1)
         self.assertEqual(db_movie.duration, 200)

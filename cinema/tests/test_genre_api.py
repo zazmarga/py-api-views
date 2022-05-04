@@ -22,14 +22,10 @@ class GenreApiTests(TestCase):
         )
 
     def test_genre_list_is_subclass(self):
-        self.assertEqual(
-            issubclass(GenreList, APIView), True
-        )
+        self.assertEqual(issubclass(GenreList, APIView), True)
 
     def test_genre_detail_is_subclass(self):
-        self.assertEqual(
-            issubclass(GenreDetail, APIView), True
-        )
+        self.assertEqual(issubclass(GenreDetail, APIView), True)
 
     def test_get_genres(self):
         response = self.client.get("/api/cinema/genres/")
@@ -43,7 +39,7 @@ class GenreApiTests(TestCase):
             {
                 "id": 3,
                 "name": "Sci-fi",
-            }
+            },
         )
         db_genres = Genre.objects.all()
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -52,10 +48,12 @@ class GenreApiTests(TestCase):
 
     def test_get_genre(self):
         response = self.client.get("/api/cinema/genres/2/")
-        serializer = GenreSerializer(Genre(
-            id=2,
-            name="Drama",
-        ))
+        serializer = GenreSerializer(
+            Genre(
+                id=2,
+                name="Drama",
+            )
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, serializer.data)
 
@@ -68,7 +66,7 @@ class GenreApiTests(TestCase):
             "/api/cinema/genres/1/",
             {
                 "name": "Sci-fi",
-            }
+            },
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -77,7 +75,7 @@ class GenreApiTests(TestCase):
             "/api/cinema/genres/1/",
             {
                 "name": "Sci-fi",
-            }
+            },
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
