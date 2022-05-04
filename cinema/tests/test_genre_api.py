@@ -13,11 +13,9 @@ class GenreApiTests(TestCase):
     def setUp(self):
         self.client = APIClient()
         Genre.objects.create(
-            id=1,
             name="Comedy",
         )
         Genre.objects.create(
-            id=2,
             name="Drama",
         )
 

@@ -12,13 +12,11 @@ class CinemaHallApiTests(TestCase):
     def setUp(self):
         self.client = APIClient()
         CinemaHall.objects.create(
-            id=1,
             name="Blue",
             rows=15,
             seats_in_row=20,
         )
         CinemaHall.objects.create(
-            id=2,
             name="VIP",
             rows=6,
             seats_in_row=8,

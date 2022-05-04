@@ -11,8 +11,8 @@ from cinema.views import ActorList, ActorDetail
 class ActorApiTests(TestCase):
     def setUp(self):
         self.client = APIClient()
-        Actor.objects.create(id=1, first_name="George", last_name="Clooney")
-        Actor.objects.create(id=2, first_name="Keanu", last_name="Reeves")
+        Actor.objects.create(first_name="George", last_name="Clooney")
+        Actor.objects.create(first_name="Keanu", last_name="Reeves")
 
     def test_actor_list_is_subclass(self):
         self.assertEqual(issubclass(ActorList, mixins.ListModelMixin), True)

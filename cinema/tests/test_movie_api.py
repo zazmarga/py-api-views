@@ -13,13 +13,11 @@ class MovieApiTests(TestCase):
     def setUp(self):
         self.client = APIClient()
         Movie.objects.create(
-            id=1,
             title="Titanic",
             description="Titanic description",
             duration=200,
         )
         Movie.objects.create(
-            id=2,
             title="Batman",
             description="Batman description",
             duration=190,
