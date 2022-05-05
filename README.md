@@ -15,8 +15,8 @@ already have a new field here)
 Create serializers for all these models.
 
 Create views for models interaction endpoints via different class-based views:
-- For the `Actor` model use an `APIView`
-- For the `Genre` model use a `GenericAPIView`
+- For the `Genre` model use an `APIView`
+- For the `Actor` model use a `GenericAPIView`
 - For the `CinemaHall` model use a `GenericViewSet`
 - For the `Movie` model use a `ModelViewSet` and `routers`
 
