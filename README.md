@@ -20,7 +20,7 @@ Create views for models interaction endpoints via different class-based views:
 - For the `CinemaHall` model use a `GenericViewSet`
 - For the `Movie` model use a `ModelViewSet` and `routers`
 
-For every <entity> from `actors`, `genres`, `cinemahalls`, `movies`, such
+For every `<entity>` from `actors`, `genres`, `cinemahalls`, `movies`, such
 endpoints should work:
 * `GET api/cinema/<entity>/` - should return a list of the all entity items
 * `GET api/cinema/<entity>/<pk>/` - should return an entity with given id 
