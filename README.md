@@ -12,7 +12,8 @@ the ones you wrote in Django ORM module. Modules should have such fields:
 - `Movie`: `title`, `description`, `actors`, `genres`, `duration`. (note: you 
 already have a new field here) 
 
-Create serializers for all these models.
+Create serializers for all these models. Do not use related serializers for
+ManyToMany relations.
 
 Create views for models interaction endpoints via different class-based views:
 - For the `Genre` model use an `APIView`
@@ -23,7 +24,8 @@ Create views for models interaction endpoints via different class-based views:
 For every `<entity>` from `actors`, `genres`, `cinema_halls`, `movies`, such
 endpoints should work:
 * `GET api/cinema/<entity>/` - should return a list of the all entity items
-* `GET api/cinema/<entity>/<pk>/` - should return an entity with given id 
 * `POST api/cinema/<entity>/` - should create a new entity based on passed data
+* `GET api/cinema/<entity>/<pk>/` - should return an entity with given id
 * `PUT api/cinema/<entity>/<pk>/` - should update the entity with given id based on passed data
+* `PATCH api/cinema/<entity>/<pk>/` - should partially update the entity with given id based on passed data
 * `DELETE api/cinema/<entity>/<pk>/` - should delete the entity with given id
