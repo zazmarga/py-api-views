@@ -7,7 +7,7 @@ Now, you are going to implement views via class-based views.
 Create `Genre`, `Actor`, `CinemaHall` models and update `Movie` model to
 the ones you wrote in Django ORM module. Modules should have such fields:
 - `Actor`: `first_name`, `last_name`
-- `Genre`: `name`
+- `Genre`: `name` (note: must be unique)
 - `CinemaHall`: `name`, `rows`, `seats_in_row`
 - `Movie`: `title`, `description`, `actors`, `genres`, `duration`. (note: you 
 already have a new field here) 
