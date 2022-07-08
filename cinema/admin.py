@@ -4,5 +4,5 @@ from cinema.models import Movie
 
 
 @admin.register(Movie)
-class AdminMovie(admin.ModelAdmin):
+class MovieAdmin(admin.ModelAdmin):
     pass
