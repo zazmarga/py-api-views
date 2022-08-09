@@ -16,7 +16,7 @@ Create serializers for all these models. Do not use related serializers for
 ManyToMany relations.
 
 Use the following command to load prepared data from fixture to test and debug your code:
-  `python manage.py loaddata cinema_servise_db_data.json`.
+  `python manage.py loaddata cinema_serviсe_db_data.json`.
 
 Create views for models interaction endpoints via different class-based views:
 - For the `Genre` model use an `APIView`
