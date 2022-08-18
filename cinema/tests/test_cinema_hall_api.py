@@ -22,7 +22,7 @@ class CinemaHallApiTests(TestCase):
             seats_in_row=8,
         )
 
-    def test_cinema_hall_is_subclass_generic_viewsets_generic_viewset(self):
+    def test_cinema_hall_is_subclass_generic_viewset(self):
         self.assertEqual(
             issubclass(CinemaHallViewSet, viewsets.GenericViewSet), True
         )
