@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from rest_framework.test import APIClient
-from rest_framework import status, generics
+from rest_framework import status, viewsets
 
 from cinema.serializers import CinemaHallSerializer
 from cinema.models import CinemaHall
@@ -22,10 +22,13 @@ class CinemaHallApiTests(TestCase):
             seats_in_row=8,
         )
 
-    def test_cinema_hall_is_subclass_generic_api_view(self):
+    def test_cinema_hall_is_subclass_generic_viewsets_generic_viewset(self):
         self.assertEqual(
-            issubclass(CinemaHallViewSet, generics.GenericAPIView), True
+            issubclass(CinemaHallViewSet, viewsets.GenericViewSet), True
         )
+
+    def test_cinema_hall_is_not_subclass(self):
+        self.assertEqual(issubclass(CinemaHallViewSet, viewsets.ModelViewSet), False)
 
     def test_get_cinema_halls(self):
         response = self.client.get("/api/cinema/cinema_halls/")

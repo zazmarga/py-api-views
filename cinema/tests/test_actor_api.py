@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from rest_framework import status, generics, mixins
+from rest_framework import status, generics, mixins, viewsets
 from rest_framework.test import APIClient
 
 from cinema.serializers import ActorSerializer
@@ -19,6 +19,9 @@ class ActorApiTests(TestCase):
         self.assertEqual(issubclass(ActorList, mixins.CreateModelMixin), True)
         self.assertEqual(issubclass(ActorList, generics.GenericAPIView), True)
 
+    def test_actor_list_is_not_subclass(self):
+        self.assertEqual(issubclass(ActorList, viewsets.GenericViewSet), False)
+
     def test_actor_detail_is_subclass(self):
         self.assertEqual(
             issubclass(ActorDetail, mixins.RetrieveModelMixin), True
@@ -32,6 +35,9 @@ class ActorApiTests(TestCase):
         self.assertEqual(
             issubclass(ActorDetail, generics.GenericAPIView), True
         )
+
+    def test_actor_detail_is_not_subclass(self):
+        self.assertEqual(issubclass(ActorDetail, viewsets.GenericViewSet), False)
 
     def test_get_actors(self):
         response = self.client.get("/api/cinema/actors/")
