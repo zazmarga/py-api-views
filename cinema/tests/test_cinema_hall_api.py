@@ -23,12 +23,12 @@ class CinemaHallApiTests(TestCase):
         )
 
     def test_cinema_hall_is_subclass_generic_viewset(self):
-        self.assertEqual(
+        self.assertIs(
             issubclass(CinemaHallViewSet, viewsets.GenericViewSet), True
         )
 
     def test_cinema_hall_is_not_subclass(self):
-        self.assertEqual(issubclass(CinemaHallViewSet, viewsets.ModelViewSet), False)
+        self.assertIs(issubclass(CinemaHallViewSet, viewsets.ModelViewSet), False)
 
     def test_get_cinema_halls(self):
         response = self.client.get("/api/cinema/cinema_halls/")
