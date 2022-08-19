@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from rest_framework import status
+from rest_framework import status, generics, viewsets
 from rest_framework.test import APIClient
 from rest_framework.views import APIView
 
@@ -20,10 +20,24 @@ class GenreApiTests(TestCase):
         )
 
     def test_genre_list_is_subclass(self):
-        self.assertEqual(issubclass(GenreList, APIView), True)
+        self.assertIs(issubclass(GenreList, APIView), True)
+
+    def test_genre_list_is_not_subclass(self):
+        items = [generics.GenericAPIView, viewsets.GenericViewSet]
+
+        for item in items:
+            with self.subTest(str(item).split(".")[2]):
+                self.assertIs(issubclass(GenreList, item), False)
 
     def test_genre_detail_is_subclass(self):
-        self.assertEqual(issubclass(GenreDetail, APIView), True)
+        self.assertIs(issubclass(GenreDetail, APIView), True)
+
+    def test_genre_detail_is_not_subclass(self):
+        items = [generics.GenericAPIView, viewsets.GenericViewSet]
+
+        for item in items:
+            with self.subTest(str(item).split(".")[2]):
+                self.assertIs(issubclass(GenreDetail, item), False)
 
     def test_get_genres(self):
         response = self.client.get("/api/cinema/genres/")

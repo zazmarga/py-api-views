@@ -24,7 +24,7 @@ class MovieApiTests(TestCase):
         )
 
     def test_movie_viewset_is_subclass_model_viewset(self):
-        self.assertEqual(issubclass(MovieViewSet, ModelViewSet), True)
+        self.assertIs(issubclass(MovieViewSet, ModelViewSet), True)
 
     def test_get_movies(self):
         movies = self.client.get("/api/cinema/movies/")
