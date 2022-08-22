@@ -20,24 +20,24 @@ class GenreApiTests(TestCase):
         )
 
     def test_genre_list_is_subclass(self):
-        self.assertIs(issubclass(GenreList, APIView), True)
+        self.assertTrue(issubclass(GenreList, APIView))
 
     def test_genre_list_is_not_subclass(self):
         items = [generics.GenericAPIView, viewsets.GenericViewSet]
 
         for item in items:
             with self.subTest(str(item).split(".")[2]):
-                self.assertIs(issubclass(GenreList, item), False)
+                self.assertFalse(issubclass(GenreList, item))
 
     def test_genre_detail_is_subclass(self):
-        self.assertIs(issubclass(GenreDetail, APIView), True)
+        self.assertTrue(issubclass(GenreDetail, APIView))
 
     def test_genre_detail_is_not_subclass(self):
         items = [generics.GenericAPIView, viewsets.GenericViewSet]
 
         for item in items:
             with self.subTest(str(item).split(".")[2]):
-                self.assertIs(issubclass(GenreDetail, item), False)
+                self.assertFalse(issubclass(GenreDetail, item))
 
     def test_get_genres(self):
         response = self.client.get("/api/cinema/genres/")
