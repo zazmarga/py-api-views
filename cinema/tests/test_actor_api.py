@@ -15,29 +15,22 @@ class ActorApiTests(TestCase):
         Actor.objects.create(first_name="Keanu", last_name="Reeves")
 
     def test_actor_list_is_subclass(self):
-        self.assertIs(issubclass(ActorList, mixins.ListModelMixin), True)
-        self.assertIs(issubclass(ActorList, mixins.CreateModelMixin), True)
-        self.assertIs(issubclass(ActorList, generics.GenericAPIView), True)
+        self.assertTrue(issubclass(ActorList, mixins.ListModelMixin))
+        self.assertTrue(issubclass(ActorList, mixins.CreateModelMixin))
+        self.assertTrue(issubclass(ActorList, generics.GenericAPIView))
 
     def test_actor_list_is_not_subclass(self):
-        self.assertIs(issubclass(ActorList, viewsets.GenericViewSet), False)
+        self.assertFalse(issubclass(ActorList, viewsets.GenericViewSet))
 
     def test_actor_detail_is_subclass(self):
-        self.assertIs(
-            issubclass(ActorDetail, mixins.RetrieveModelMixin), True
-        )
-        self.assertIs(
-            issubclass(ActorDetail, mixins.UpdateModelMixin), True
-        )
-        self.assertIs(
-            issubclass(ActorDetail, mixins.DestroyModelMixin), True
-        )
-        self.assertIs(
-            issubclass(ActorDetail, generics.GenericAPIView), True
-        )
+        items = [mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView]
+
+        for item in items:
+            with self.subTest():
+                self.assertTrue(issubclass(ActorDetail, item))
 
     def test_actor_detail_is_not_subclass(self):
-        self.assertIs(issubclass(ActorDetail, viewsets.GenericViewSet), False)
+        self.assertFalse(issubclass(ActorDetail, viewsets.GenericViewSet))
 
     def test_get_actors(self):
         response = self.client.get("/api/cinema/actors/")
